@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from datetime import datetime
 from pm25 import get_pm25
+import json
 app = Flask(__name__)
 
 
@@ -20,6 +21,7 @@ def stock():
         {'分類': '香港恆生', '指數': '25,083.71'},
         {'分類': '上海綜合', '指數': '3,380.68'}
     ]
+
     return render_template('./stock.html', stocks=all_stocks)
 
 
@@ -57,6 +59,23 @@ def pm25():
             columns, values = get_pm25(type=2)
 
     return render_template("./pm25.html", columns=columns, values=values, date=date)
+
+
+@app.route('/pm25-chart')
+def pm25_chart():
+    return render_template('pm25-charts.html')
+
+
+@app.route('/pm25-data', methods=["GET", "POST"])
+def get_pm25_data():
+    columns, values = get_pm25()
+
+    site = [value[1] for value in values]
+    pm25 = [value[2] for value in values]
+
+    data = {'site': site, 'pm25': pm25}
+    print(data)
+    return json.dumps(data, ensure_ascii=False)
 
 
 if __name__ == "__main__":
