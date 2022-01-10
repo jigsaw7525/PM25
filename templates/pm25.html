@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        h1 {
+            text-align: center;
+
+        }
+
+        body {
+            background-color: thistle;
+        }
+
+        button {
+            width: 5%;
+            margin: 20px auto;
+            height: 50px;
+            font-size: 20px;
+            align-content: center;
+        }
+
+        table {
+            width: 60%;
+            margin: 10px auto;
+            height: 200px;
+        }
+
+        table th {
+            font-weight: 100;
+            background-color: tomato;
+            color: white;
+        }
+
+        tr {
+            text-align: center;
+        }
+
+        th {
+            background-color: tomato;
+            color: white;
+        }
+
+        td {
+            background-color: rgb(240, 186, 136);
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>PM2.5全台資訊</h1>
+    <form action="" method="post">
+        <div style="text-align:center;">
+            <button type="submit">重置</button>
+            <h3>更新時間為: {{date}}</h3>
+            <input type="submit" value="大到小" name="reverse">
+            <input type="submit" value="小到大" name="ascending">
+        </div>
+    </form>
+
+    <table border="1">
+        <thead>
+            <tr>
+                {% for th in columns %}
+                <th>{{th}}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in values %}
+            <tr>
+                {% for data in row %}
+                <td>{{data}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>
