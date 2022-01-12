@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from datetime import datetime
-from pm25 import get_pm25
+from pm25 import *
 import json
 app = Flask(__name__)
 
@@ -63,7 +63,19 @@ def pm25():
 
 @app.route('/pm25-chart')
 def pm25_chart():
-    return render_template('pm25-charts.html')
+    countys = get_county()
+    return render_template('./pm25-charts.html', countys=countys)
+
+
+@app.route('/county-pm25/<string:county>')
+def get_county_json(county):
+    datas = get_county_pm25(county)
+    data = {
+        'title': county,
+        'county': [data[0] for data in datas],
+        'pm25': [data[-1] for data in datas]
+    }
+    return json.dumps(data, ensure_ascii=False)
 
 
 @app.route('/pm25-data', methods=["GET", "POST"])
@@ -72,10 +84,21 @@ def get_pm25_data():
 
     site = [value[1] for value in values]
     pm25 = [value[2] for value in values]
+    date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    datas = [[value[1], value[-1]]for value in values]
+    datas = sorted(datas, key=lambda x: x[-1])
 
-    data = {'site': site, 'pm25': pm25}
+    data = {'site': site, 'pm25': pm25, 'date': date,
+            'highest': datas[-1], 'lowest': datas[0]}
     print(data)
     return json.dumps(data, ensure_ascii=False)
+
+
+@app.route('/six-data', methods=["GET", "POST"])
+def get_six_json():
+    datas = get_six_pm25()
+    return json. dumps({'county': list(datas.keys()), 'pm25': list(datas.values())},
+                       ensure_ascii=False)
 
 
 if __name__ == "__main__":

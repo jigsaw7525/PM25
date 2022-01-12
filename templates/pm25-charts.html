@@ -14,8 +14,45 @@
 
 <body>
     <h1>chart</h1>
-    <div id="cotainer"></div>
-    <div id="main"></div>
+    <div id="container">
+        <h1>全台PM2.5即時資訊</h1>
+        <div id="pm25_high_site" class="banner">
+            N/A
+        </div>
+        <div id="pm25_high_value" class="value"> PM2.5 :數值</div>
+        <div id="pm25_low_site" class="banner">
+            N/A
+        </div>
+        <div id="pm25_low_value" class="value"> PM2.5 :數值</div>
+    </div>
+
+    <p id="date">
+        更新時間:取得中...
+    </p>
+    <form action="">
+        <button class="button">
+            更新資料
+        </button>
+    </form>
+
+    <!-- 繪製區域 -->
+    <div id="main" style="width: 100%;height:500px;">
+    </div>
+
+    <div id="six" style="width: 100%;height:400px;">
+
+    </div>
+    <select name="select_county" id="select_county">
+        {% for county in countys %}
+        <option value="{{county}}">{{county}}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" id="county_btn"></input>
+
+    <div id="county" style="width: 100%;height:400px;">
+
+    </div>
+    <a href="/">回首頁</a>
     <script src="../static/js/main.js"></script>
 </body>
 
