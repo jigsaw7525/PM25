@@ -67,7 +67,7 @@ def pm25_chart():
     return render_template('./pm25-charts.html', countys=countys)
 
 
-@app.route('/county-pm25/<string:county>')
+@app.route('/county-pm25/<string:county>', methods=["GET", "POST"])
 def get_county_json(county):
     datas = get_county_pm25(county)
     data = {

@@ -16,8 +16,60 @@ $('#county_btn').click(() => {
 $(document).ready(() => {
     drawPM25();
     drawSixPM25();
-    //drawCountyPM25('新北市');
+    drawCountyPM25("新北市");
 });
+
+
+function drawCountyPM25(county) {
+    $.ajax(
+        {
+            url: `/county-pm25/${county}`,
+            type: 'post',
+            dataType: 'json',
+            success: (data) => {
+                console.log(data);
+                // 指定图表的配置项和数据
+                const option = {
+                    title: {
+                        text: county + '各區域PM2.5資訊'
+                    },
+                    tooltip: {},
+                    legend: {
+                        data: ['PM2.5']
+                    },
+                    xAxis: {
+                        data: data['county']
+                    },
+                    yAxis: {},
+                    series: [
+                        {
+                            showBackground: true,
+                            itemStyle: {
+                                // Styles for normal state.
+                                normal: {
+                                    color: '#661058'
+                                },
+                                // Styles for emphasis state.
+                                emphasis: {
+                                    color: '#981883'
+                                }
+                            },
+                            name: 'pm2.5',
+                            type: 'bar',
+                            data: data['pm25']
+                        }
+                    ]
+                };
+
+                chart3.setOption(option);
+
+
+            },
+            error: () => alert('讀取失敗!'),
+        }
+    )
+}
+
 
 function drawSixPM25() {
     $.ajax(
@@ -30,7 +82,7 @@ function drawSixPM25() {
                 // 指定图表的配置项和数据
                 const option = {
                     title: {
-                        text: 'PM2.5六都平均資訊'
+                        text: '六都平均PM2.5資訊'
                     },
                     tooltip: {},
                     legend: {
@@ -80,7 +132,7 @@ function drawPM25() {
                 // 指定图表的配置项和数据
                 const option = {
                     title: {
-                        text: 'PM2.5全台資訊'
+                        text: '全台PM2.5資訊'
                     },
                     tooltip: {},
                     legend: {
