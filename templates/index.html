@@ -9,9 +9,12 @@
 </head>
 
 <body>
+    <!--變數要用兩個大括弧-->
     <h1>Flask</h1>
-    <h2>{{context["name"]}}</h2>
-    <h3>{{context["date"]}}</h3>
+    <h2>訪客名稱:{{context["name"]}}</h2>
+    <h3>現在時間:{{context["date"]}}</h3>
+
+    <!--建立連結-->
     <a href="/stocks">股市</a>
     <a href="/pm25">pm2.5</a>
     <a href="/pm25-chart">pm2.5圖表</a>

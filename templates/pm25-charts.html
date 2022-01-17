@@ -13,46 +13,40 @@
 </head>
 
 <body>
-    <h1>chart</h1>
     <div id="container">
         <h1>全台PM2.5即時資訊</h1>
-        <div id="pm25_high_site" class="banner">
-            N/A
-        </div>
+        <div id="pm25_high_site" class="banner">N/A</div>
         <div id="pm25_high_value" class="value"> PM2.5 :數值</div>
-        <div id="pm25_low_site" class="banner">
-            N/A
-        </div>
+        <div id="pm25_low_site" class="banner">N/A</div>
         <div id="pm25_low_value" class="value"> PM2.5 :數值</div>
     </div>
 
-    <p id="date">
-        更新時間:取得中...
-    </p>
-    <form action="">
-        <button class="button">
-            更新資料
-        </button>
-    </form>
+    <p id="date">更新時間:取得中...</p>
 
-    <!-- 繪製區域 -->
-    <div id="main" style="width: 100%;height:500px;">
-    </div>
+    <form action=""><button class="button">更新資料</button></form>
 
-    <div id="six" style="width: 100%;height:400px;">
+    <!-- 繪製區域1 -->
+    <div id="main" style="width: 100%;height:500px;"></div>
 
-    </div>
+    <!-- 繪製區域2 -->
+    <div id="six" style="width: 100%;height:400px;"></div>
+
+    <!-- 選單 -->
     <select name="select_county" id="select_county">
         {% for county in countys %}
         <option value="{{county}}">{{county}}</option>
         {% endfor %}
     </select>
+
+    <!-- 提交按鈕 -->
     <input type="submit" id="county_btn"></input>
 
-    <div id="county" style="width: 100%;height:400px;">
-
-    </div>
+    <!-- 繪製區域3 -->
+    <div id="county" style="width: 100%;height:400px;"></div>
+    <!-- 回首頁連結 -->
     <a href="/">回首頁</a>
+
+    <!-- 引入java script -->
     <script src="../static/js/main.js"></script>
 </body>
 

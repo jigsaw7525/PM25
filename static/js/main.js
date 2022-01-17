@@ -2,12 +2,14 @@ const chart1 = echarts.init(document.querySelector('#main'));
 const chart2 = echarts.init(document.querySelector('#six'));
 const chart3 = echarts.init(document.querySelector('#county'));
 
+//自動縮放
 window.onresize = function () {
     chart1.resize();
     chart2.resize();
     chart3.resize();
 };
 
+//jquery寫法
 $('#county_btn').click(() => {
     const county = $('#select_county').val();
     drawCountyPM25(county);
@@ -47,11 +49,11 @@ function drawCountyPM25(county) {
                             itemStyle: {
                                 // Styles for normal state.
                                 normal: {
-                                    color: '#661058'
+                                    color: '#00ff7f'
                                 },
                                 // Styles for emphasis state.
                                 emphasis: {
-                                    color: '#981883'
+                                    color: '#00ff7f'
                                 }
                             },
                             name: 'pm2.5',
